@@ -3,7 +3,7 @@ MAINTAINER gjchen <gjchen.tw@gmail.com>
 
 RUN 	echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
 	apk --no-cache --no-progress upgrade -f && \
-	apk --no-cache --no-progress add nginx postfix php7-fpm
+	apk --no-cache --no-progress add nginx php7-fpm
 
 RUN	echo 'pid /var/run/nginx.pid;' > /etc/nginx/modules/pid.conf
 ADD	nginx_default_server.conf /etc/nginx/conf.d/default.conf
@@ -37,4 +37,4 @@ ENV	PHPFPM_PM_MAX_REQUESTS=16
 
 VOLUME	["/app"]
 
-CMD	rsyslogd; postconf "smtputf8_enable = no"; postfix start; crond -b; php-fpm7; nginx -g "daemon off;";
+CMD	rsyslogd; crond -b; php-fpm7; nginx -g "daemon off;";
