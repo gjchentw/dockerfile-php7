@@ -1,3 +1,4 @@
+FROM gjchen/alpine:latest
 MAINTAINER gjchen <gjchen.tw@gmail.com>
 
 RUN 	echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
