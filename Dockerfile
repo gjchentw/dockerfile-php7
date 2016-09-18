@@ -48,7 +48,7 @@ RUN	apk -v --no-cache --no-progress add postfix \
 	php7-imap \
 	php7-ldap
 
-
+RUN	postconf "smtputf8_enable=no"
 ENV	PHP_ERROR_LOG=syslog
 ENV	PHP_LOG_ERRORS=1
 ENV	PHP_DISPLAY_ERRORS=1
@@ -77,4 +77,4 @@ ENV	PHPFPM_PM_MAX_REQUESTS=16
 
 VOLUME	["/app"]
 
-CMD	rsyslogd; crond -b; php-fpm7; nginx -g "daemon off;";
+CMD	rsyslogd; crond -b; postfix start; php-fpm7; nginx -g "daemon off;";
