@@ -3,11 +3,13 @@ MAINTAINER gjchen <gjchen.tw@gmail.com>
 
 RUN 	echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
 	apk --no-cache --no-progress upgrade -f && \
-	apk --no-cache --no-progress add nginx php7-fpm
+	apk --no-cache --no-progress add nginx php7 php7-fpm
 
-RUN	echo 'pid /var/run/nginx.pid;' > /etc/nginx/modules/pid.conf
+RUN	echo 'pid /var/run/nginx.pid;' > /etc/nginx/modules/pid.conf && \
+	ln -s /usr/bin/php7 /usr/bin/php
 ADD	nginx_default_server.conf /etc/nginx/conf.d/default.conf
 ADD	php-fpm-www.conf /etc/php7/php-fpm.d/www-override.conf
+ADD	php-cli.ini /etc/php7/php-cli.ini
 ADD	index.php /app/index.php
 
 ENV	PHP_ERROR_LOG=syslog
@@ -19,6 +21,7 @@ ENV	PHP_OPEN_SHORT_TAG=0
 ENV	PHP_MAX_EXECUTION_TIME=30
 ENV	PHP_MAX_INPUT_TIME=60
 ENV	PHP_MEMORY_LIMIT=128M
+ENV	PHP_CLI_MEMORY_LIMIT=512M
 ENV	PHP_POST_MAX_SIZE=8M
 ENV	PHP_UPLOAD_MAX_FILESIZE=2M
 ENV	PHP_SESSION_NAME=PHPSESSID
