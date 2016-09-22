@@ -29,6 +29,7 @@ RUN	apk -v --no-cache --no-progress add postfix \
 	php7-phar \
 	php7-posix \
 	php7-pspell \
+	php7-session \
 	php7-shmop \
 	php7-snmp \
 	php7-soap \
