@@ -20,7 +20,7 @@ Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHP_SESSION_NAME=PHPSESSID
 *  PHP_SESSION_SAVE_HANDLER=files
 *  PHP_SESSION_SAVE_PATH=/tmp
-*  PHPFPM_LSITEN=127.0.0.1:9000
+*  PHPFPM_LISTEN=127.0.0.1:9000
 *  PHPFPM_USER=nobody
 *  PHPFPM_GROUP=nobody
 *  PHPFPM_PM=ondemand
