@@ -1,5 +1,5 @@
-# gjchen/php56@Dockerhub
-**Alpine Linux** with *nginx* and *php5-fpm* configured.
+# gjchen/php7@Dockerhub
+**Alpine Linux** with *nginx* and *php7-fpm* configured.
 * Base docker image: https://hub.docker.com/r/gjchen/alpine/
 
 **PHP_EXT_ENABLED**: Enable installed PHP extension.
@@ -9,7 +9,7 @@ ENV	PHP_EXT_ENABLED="oauth apcu apfd bcmath bz2 calendar ctype curl dba dom ench
 ```
 * To disabled extensions, remove the name in PHP_EXT_ENABLED *before* starting the container:
 ```
-docker run -d -e PHP_EXT_ENABLED="enabled extensions name" -p 80:80 gjchen/php56
+docker run -d -e PHP_EXT_ENABLED="enabled extensions name" -p 80:80 gjchen/php7
 ```
 
 Use enviornment variables to control php-fpm/php-cli (defaults) :
