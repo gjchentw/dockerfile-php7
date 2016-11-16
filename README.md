@@ -1,8 +1,16 @@
-# gjchen/php7@Dockerhub
-Alpine Linux with nginx and php7-fpm configured.
+# gjchen/php56@Dockerhub
+**Alpine Linux** with *nginx* and *php7-fpm* configured.
 * Base docker image: https://hub.docker.com/r/gjchen/alpine/
-* Branch base: automated build gjchen/php7:base, without any php extension installed yet.
-* Branch master: automated build gjchen/php7:latest, mostly-using extensions installed.
+
+**PHP_EXT_ENABLED**: Enable installed PHP extension.
+* Some PHP extension installed and enabled through PHP_EXT_ENABLED:
+```Dockerfile
+ENV	PHP_EXT_ENABLED="apcu apfd bcmath bz2 calendar ctype curl dba dom enchant exif ftp gd geoip gettext gmp http iconv imagick imap intl ldap mbstring mcrypt memcached mongodb msgpack mysqli mysqlnd oauth odbc opcache openssl pcntl pdo pdo_dblib pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql phar posix propro pspell raphf readline session shmop snmp sqlite3 sysvmsg sysvsem sysvshm tidy wddx xdebug xml xmlreader xmlrpc xsl zip zlib"
+```
+* To disabled extensions, remove the name in PHP_EXT_ENABLED *before* starting the container:
+```
+docker run -d -e PHP_EXT_ENABLED="enabled extensions name" -p 80:80 gjchen/php7
+```
 
 Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHP_ERROR_LOG=syslog
@@ -20,7 +28,8 @@ Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHP_SESSION_NAME=PHPSESSID
 *  PHP_SESSION_SAVE_HANDLER=files
 *  PHP_SESSION_SAVE_PATH=/tmp
-*  PHPFPM_LSITEN=127.0.0.1:9000
+*  PHP_XDEBUG_HOST="172.17.0.1"
+*  PHPFPM_LISTEN=127.0.0.1:9000
 *  PHPFPM_USER=nobody
 *  PHPFPM_GROUP=nobody
 *  PHPFPM_PM=ondemand
@@ -29,4 +38,15 @@ Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHPFPM_PM_MIN_SPARE_SERVERS=2
 *  PHPFPM_PM_MAX_SPARE_SERVERS=6
 *  PHPFPM_PM_MAX_REQUESTS=16
-  
+
+**Xdebug**: 
+* xdebug.ini is tuned for debuger running on docker host - 172.17.0.1
+* Change PHP_XDEBUG_HOST for remote debugging
+```ini
+zend_extension="xdebug.so"
+xdebug.profiler_enable = On
+xdebug.remote_enable = On
+xdebug.remote_port = 9000
+xdebug.remote_handler = dbgp
+xdebug.remote_host = ${PHP_XDEBUG_HOST}
+```  
