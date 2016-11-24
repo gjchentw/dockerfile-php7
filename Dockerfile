@@ -192,6 +192,6 @@ RUN	echo 'pid /var/run/nginx.pid;' > /etc/nginx/modules/pid.conf && \
 
 VOLUME	["/app"]
 
-CMD	rsyslogd; crond -b; php-fpm.sh; nginx -g "daemon off;";
+CMD	rsyslogd; crond -b; postfix start; php-fpm.sh; nginx -g "daemon off;";
 
 
