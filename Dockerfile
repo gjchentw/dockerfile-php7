@@ -75,7 +75,7 @@ RUN 	echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/r
 	php7-phpdbg \
 	php7-posix \
 	php7-pspell \
-	php7-readline \
+#	php7-readline \
 	php7-session \
 	php7-shmop \
 	php7-snmp \
