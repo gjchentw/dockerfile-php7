@@ -38,6 +38,9 @@ ENV	PHPFPM_PM_MIN_SPARE_SERVERS=2
 ENV	PHPFPM_PM_MAX_SPARE_SERVERS=6
 ENV	PHPFPM_PM_MAX_REQUESTS=16
 
+ENV	SYSLOG_ENABLED=0
+ENV	CRON_ENABLED=0
+
 VOLUME	["/app"]
 
-CMD	rsyslogd; crond -b; php-fpm7; nginx -g "daemon off;";
+CMD	test 0${SYSLOG_ENABLED} -ne 0 && rsyslogd; test 0${CRON_ENABLED} -ne 0 && crond -b; php-fpm7; nginx -g "daemon off;";
