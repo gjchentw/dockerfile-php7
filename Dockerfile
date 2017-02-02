@@ -4,7 +4,7 @@ MAINTAINER gjchen <gjchen.tw@gmail.com>
 ENV	PHP_ERROR_LOG=syslog
 ENV	PHP_LOG_ERRORS=1
 ENV	PHP_DISPLAY_ERRORS=1
-ENV	PHP_ERROR_REPORTING=-1
+ENV	PHP_ERROR_REPORTING=22517	# E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED & ~E_WARNING
 ENV	PHP_TIMEZONE="Asia/Taipei"
 ENV	PHP_SHORT_OPEN_TAG=0
 ENV	PHP_MAX_EXECUTION_TIME=30
@@ -181,6 +181,8 @@ RUN	echo xdebug.profiler_enable = On >> /etc/php7/mods-available/xdebug.ini && \
 	echo xdebug.remote_port = 9000 >> /etc/php7/mods-available/xdebug.ini && \
 	echo xdebug.remote_handler = "dbgp" >> /etc/php7/mods-available/xdebug.ini
 
+ENV	SYSLOG_ENABLED=0
+ENV	CRON_ENABLED=0
 ENV	POSTFIX_ENABLED=0
 ENV	PHP_EXT_ENABLED="apcu apfd bcmath bz2 calendar ctype curl dba dom enchant exif ftp gd geoip gettext gmp http iconv imagick imap intl json ldap mbstring mcrypt memcached mongodb msgpack mysqli mysqlnd oauth odbc opcache openssl pcntl pdo pdo_dblib pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql phar posix propro pspell raphf readline session shmop snmp soap sockets sqlite3 sysvmsg sysvsem sysvshm tidy wddx xdebug xml xmlreader xmlrpc xsl zip zlib"
 ADD	nginx_default_server.conf /etc/nginx/conf.d/default.conf
@@ -194,6 +196,6 @@ RUN	echo 'pid /var/run/nginx.pid;' > /etc/nginx/modules/pid.conf && \
 
 VOLUME	["/app"]
 
-CMD	rsyslogd; crond -b; test 0${POSTFIX_ENABLED} -ne 0 && postfix start; php-fpm.sh; nginx -g "daemon off;";
+CMD	test 0${SYSLOG_ENABLED} -ne 0 && rsyslogd; test 0${CRON_ENABLED} -ne 0 && crond -b; test 0${POSTFIX_ENABLED} -ne 0 && postfix start; php-fpm.sh; nginx -g "daemon off;";
 
 
