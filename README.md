@@ -2,23 +2,10 @@
 **Alpine Linux** with *nginx* and *php7-fpm* configured.
 * Base docker image: https://hub.docker.com/r/gjchen/alpine/
 
-**PHP_EXT_ENABLED**: Enable installed PHP extension.
-* Some PHP extension installed and enabled through PHP_EXT_ENABLED:
-```Dockerfile
-ENV	PHP_EXT_ENABLED="oauth apcu apfd bcmath bz2 calendar ctype curl dba dom enchant exif ftp gd geoip gettext gmp http iconv igbinary imagick imap intl ldap mcrypt memcache memcached mongodb msgpack mssql mysql mysqli odbc opcache openssl pcntl pdo pdo_dblib pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql phar posix propro pspell raphf shmop snmp sqlite3 sysvmsg sysvsem sysvshm xdebug xml wddx xmlreader xmlrpc xsl zip zlib"
-```
-* To disabled extensions, remove the name in PHP_EXT_ENABLED *before* starting the container:
-```
-docker run -d -e PHP_EXT_ENABLED="enabled extensions name" -p 80:80 gjchen/php7
-```
-Enable crond/rsyslogd/postfix:
-```
-docker run -d \
-    -e CRON_ENABLED=1 \		# enable crond
-    -e SYSLOG_ENABLED=1 \	# enable rsyslogd
-    -e POSTFIX_ENABLED=1 \	# enable postfix
-    -p 80:80 gjchen/php7
-```
+**gjchen/php7:base** for a minimal installation.
+
+**gjchen/php7:laravel-base** for running laravel app.
+
 
 Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHP_ERROR_LOG=syslog
@@ -26,7 +13,7 @@ Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHP_DISPLAY_ERRORS=1
 *  PHP_ERROR_REPORTING=-1
 *  PHP_TIMEZONE="Asia/Taipei"
-*  PHP_OPEN_SHORT_TAG=0
+*  PHP_SHORT_OPEN_TAG=0
 *  PHP_MAX_EXECUTION_TIME=30
 *  PHP_MAX_INPUT_TIME=60
 *  PHP_MEMORY_LIMIT=128M
