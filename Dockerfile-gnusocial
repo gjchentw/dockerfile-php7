@@ -17,7 +17,10 @@ RUN	apk --no-cache --no-progress upgrade -f && \
 	php7-mysqli \
 	php7-mysqlnd \
 	php7-opcache \
-	php7-xmlwriter 
+	php7-xmlwriter \
+	&& \
+	mkdir -p /var/spool/postfix/etc && \
+	echo nameserver 8.8.8.8 > /var/spool/postfix/etc/resolv.conf
 
 ENV	PHP_ERROR_LOG=syslog \
 	PHP_LOG_ERRORS=1 \
