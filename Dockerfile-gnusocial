@@ -2,7 +2,7 @@ FROM gjchen/php7:base
 MAINTAINER gjchen <gjchen.tw@gmail.com>
 
 RUN	apk --no-cache --no-progress upgrade -f && \
-	apk --no-cache --no-progress add coreutils ca-certificates \
+	apk --no-cache --no-progress add coreutils ca-certificates postfix \
 	php7-bcmath \
 	php7-curl \
 	php7-exif \
@@ -18,6 +18,7 @@ RUN	apk --no-cache --no-progress upgrade -f && \
 	php7-opcache \
 	php7-xmlwriter 
 
+ADD	s6.d.postfix /etc/s6.d
 
 ENV	PHP_ERROR_LOG=syslog \
 	PHP_LOG_ERRORS=1 \
