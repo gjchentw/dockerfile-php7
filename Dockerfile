@@ -1,4 +1,4 @@
-FROM gjchen/alpine:latest
+FROM gjchen/alpine:edge
 MAINTAINER gjchen <gjchen.tw@gmail.com>
 
 ENV	PHP_ERROR_LOG=syslog

@@ -6,6 +6,8 @@
 
 **gjchen/php7:laravel-base** for running laravel app.
 
+**gjchen/php7:gnusocial-base** for running gnusocial.
+
 
 Use enviornment variables to control php-fpm/php-cli (defaults) :
 *  PHP_ERROR_LOG=syslog
