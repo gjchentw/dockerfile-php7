@@ -19,8 +19,6 @@ RUN	apk --no-cache --no-progress upgrade -f && \
 	php7-opcache \
 	php7-xmlwriter 
 
-ADD	s6.d.postfix /etc/s6.d
-
 ENV	PHP_ERROR_LOG=syslog \
 	PHP_LOG_ERRORS=1 \
 	PHP_DISPLAY_ERRORS=1 \
