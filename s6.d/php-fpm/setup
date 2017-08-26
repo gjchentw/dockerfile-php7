@@ -1,5 +1,0 @@
-#!/bin/bash
-if [ -x /usr/sbin/postfix ]; then
-   /usr/sbin/postfix start
-fi
-exit 0

@@ -5,7 +5,9 @@ RUN	apk --no-cache --no-progress upgrade -f && \
 	apk --no-cache --no-progress add coreutils ca-certificates postfix \
 	php7-bcmath \
 	php7-curl \
+	php7-dom \
 	php7-exif \
+	php7-fileinfo \
 	php7-gd \
 	php7-gettext \
 	php7-gmp \
