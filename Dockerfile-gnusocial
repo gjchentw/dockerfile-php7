@@ -4,6 +4,7 @@ MAINTAINER gjchen <gjchen.tw@gmail.com>
 RUN	apk --no-cache --no-progress upgrade -f && \
 	apk --no-cache --no-progress add coreutils ca-certificates postfix \
 	php7-bcmath \
+	php7-ctype \
 	php7-curl \
 	php7-dom \
 	php7-exif \
@@ -23,6 +24,8 @@ RUN	apk --no-cache --no-progress upgrade -f && \
 	&& \
 	mkdir -p /var/spool/postfix/etc && \
 	echo nameserver 8.8.8.8 > /var/spool/postfix/etc/resolv.conf
+
+ADD	s6.d.postfix /etc/s6.d
 
 ENV	PHP_ERROR_LOG=syslog \
 	PHP_LOG_ERRORS=1 \
