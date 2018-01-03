@@ -1,4 +1,4 @@
-FROM gjchen/alpine:3.6
+FROM gjchen/alpine:3.7
 MAINTAINER gjchen <gjchen.tw@gmail.com>
  	
 RUN	apk --no-cache --no-progress upgrade -f && \
@@ -6,11 +6,11 @@ RUN	apk --no-cache --no-progress upgrade -f && \
 
 RUN	echo 'pid /var/run/nginx.pid;' > /etc/nginx/modules/pid.conf
 
-ADD	nginx_default_server.conf /etc/nginx/conf.d/default.conf
-ADD	php-fpm-www.conf /etc/php7/
-ADD	php-cli.ini /etc/php7/php-cli.ini
-ADD	index.php /app/index.php
-ADD	s6.d /etc/s6.d
+COPY	nginx_default_server.conf /etc/nginx/conf.d/default.conf
+COPY	php-fpm-www.conf /etc/php7/
+COPY	php-cli.ini /etc/php7/php-cli.ini
+COPY	index.php /app/index.php
+COPY	s6.d /etc/s6.d
 
 ENV	PHP_ERROR_LOG=syslog \
 	PHP_LOG_ERRORS=1 \
