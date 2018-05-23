@@ -1,4 +1,4 @@
-FROM gjchen/php7:base
+FROM gjchen/php7
 MAINTAINER gjchen <gjchen.tw@gmail.com>
 
 RUN	apk --no-cache --no-progress upgrade -f && \
