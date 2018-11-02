@@ -1,8 +1,8 @@
-# gjchen/php7@Dockerhub
-**Alpine Linux** with *nginx* and *php7-fpm* configured.
-* Base docker image: https://hub.docker.com/r/gjchen/alpine/
+# gjchen/php7
+* *nginx* and *php7-fpm* configured.
+* Base docker image: https://hub.docker.com/r/gjchen/debian/
 
-**gjchen/php7:base** for a minimal installation.
+**gjchen/php7:7.3** for a running php 7.3
 
 **gjchen/php7:laravel-base** for running laravel app.
 

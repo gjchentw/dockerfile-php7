@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -n "${PHPFPM_DISABLE_EXT}" ]; then
+
+  for ini in ${PHPFPM_DISABLE_EXT}
+  do
+    rm -f /etc/php/$(phpquery -V)/fpm/conf.d/*-${ini}.ini
+  done
+
+fi

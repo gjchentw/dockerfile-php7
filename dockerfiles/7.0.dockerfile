@@ -1,6 +1,6 @@
 FROM	gjchen/debian:stretch
 
-ARG	PHP=7.3
+ARG	PHP=7.0
 ENV	TZ="Asia/Taipei" \
 	APP="/app" \
 	NGINX_SERVER_TPL="/etc/nginx/conf.d/default.template" \
