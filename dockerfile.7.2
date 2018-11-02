@@ -35,7 +35,7 @@ RUN	apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 	echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list && \
 	apt-get update -y && apt-get dist-upgrade -y && \
 	apt-get install --no-install-recommends --no-install-suggests -y \
-	gettext-base nginx php${PHP}-cli $(apt-cache search php | grep ^php${PHP}- | grep -v dbgsym | grep -v php${PHP}-dev| awk '{print $1}' | xargs echo) && \
+	unzip gettext-base nginx php${PHP}-cli $(apt-cache search php | grep ^php${PHP}- | grep -v dbgsym | grep -v php${PHP}-dev| awk '{print $1}' | xargs echo) && \
 	apt-get -y autoremove && apt-get -y autoclean && \
 	wget -q -O- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin && \
 	mkdir -p /.composer && chmod 777 /.composer && \
