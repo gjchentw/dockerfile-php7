@@ -1,4 +1,4 @@
-FROM	gjchen/debian:stretch
+FROM	gjchen/debian:buster
 
 ARG	PHP=7.2
 ENV	TZ="Asia/Taipei" \
@@ -29,15 +29,17 @@ ENV	TZ="Asia/Taipei" \
 	PHPFPM_PM_MAX_SPARE_SERVERS=6 \
 	PHPFPM_PM_MAX_REQUESTS=16
 
-RUN	apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 && \
-	echo "deb http://nginx.org/packages/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list && \
-	wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - && \
-	echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list && \
+RUN	sed -i -e 's/main$/main contrib non-free/g' /etc/apt/sources.list && \
+    curl https://nginx.org/keys/nginx_signing.key | apt-key add - && \
+    echo "deb http://nginx.org/packages/debian/ buster nginx" > /etc/apt/sources.list.d/nginx.list && \    
+	curl https://packages.sury.org/php/apt.gpg | apt-key add - && \
+	echo "deb https://packages.sury.org/php/ buster main" | tee /etc/apt/sources.list.d/php.list && \
 	apt-get update -y && apt-get dist-upgrade -y && \
 	apt-get install --no-install-recommends --no-install-suggests -y \
-	unzip gettext-base nginx php${PHP}-cli $(apt-cache search php | grep ^php${PHP}- | grep -v dbgsym | grep -v php${PHP}-dev| awk '{print $1}' | xargs echo) && \
+	unzip gettext-base nginx snmp-mibs-downloader \
+    php${PHP}-cli $(apt-cache search php | grep ^php${PHP}- | grep -v dbgsym | grep -v php${PHP}-dev| awk '{print $1}' | xargs echo) && \
 	apt-get -y autoremove && apt-get -y autoclean && \
-	wget -q -O- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin && \
+	curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin && \
 	mkdir -p /.composer && chmod 777 /.composer && \
 	mkdir -p /run/php/ && chmod 777 /run/php/ && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
