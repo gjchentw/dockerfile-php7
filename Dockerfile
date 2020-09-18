@@ -1,4 +1,4 @@
-FROM	gjchen/debian:buster
+FROM	ghcr.io/gjchentw/debian:buster
 
 ARG	PHP=7.3
 ENV	TZ="Asia/Taipei" \

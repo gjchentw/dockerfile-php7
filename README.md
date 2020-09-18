@@ -1,12 +1,6 @@
-# gjchen/php7
-* *nginx* and *php7-fpm* configured.
-* Base docker image: https://hub.docker.com/r/gjchen/debian/
+## ghcr.io/gjchentw/php7
 
-**gjchen/php7:7.3** for a running php 7.3
-
-**gjchen/php7:laravel-base** for running laravel app.
-
-**gjchen/php7:gnusocial-base** for running gnusocial.
+[GitHub Package](https://github.com/users/gjchentw/packages/container/package/php7)
 
 
 Use enviornment variables to control php-fpm/php-cli (defaults) :
