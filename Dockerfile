@@ -37,7 +37,7 @@ RUN	sed -i -e 's/main$/main contrib non-free/g' /etc/apt/sources.list && \
 	apt-get update -y && apt-get dist-upgrade -y && \
 	apt-get install --no-install-recommends --no-install-suggests -y \
 	unzip gettext-base nginx snmp-mibs-downloader \
-    php${PHP}-cli $(apt-cache search php | grep ^php${PHP}- | grep -v dbgsym | grep -v php${PHP}-dev| grep -v php${PHP}-apcu | php${PHP}-gmagick | php${PHP}-yac | awk '{print $1}' | xargs echo) && \
+    php${PHP}-cli $(apt-cache search php | grep ^php${PHP}- | grep -v dbgsym | grep -v php${PHP}-dev| grep -v php${PHP}-apcu | grep -v php${PHP}-gmagick | grep -v php${PHP}-yac | awk '{print $1}' | xargs echo) && \
 	apt-get -y autoremove && apt-get -y autoclean && \
 	curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin && \
 	mkdir -p /.composer && chmod 777 /.composer && \
